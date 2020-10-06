@@ -12,7 +12,7 @@ import com.azure.backend.BaseDto;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Container(containerName = "user", ru = "400")
+@Container(containerName = "User", ru = "400")
 public class User extends BaseDto {
 
     private String id;
