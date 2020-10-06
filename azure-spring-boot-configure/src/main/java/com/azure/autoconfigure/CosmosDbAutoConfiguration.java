@@ -2,35 +2,45 @@ package com.azure.autoconfigure;
 
 import com.azure.backend.services.configuration.IConfigurationService;
 import com.azure.core.credential.AzureKeyCredential;
-import com.azure.cosmos.*;
+import com.azure.cosmos.ConsistencyLevel;
+import com.azure.cosmos.CosmosAsyncClient;
+import com.azure.cosmos.CosmosAsyncContainer;
+import com.azure.cosmos.CosmosClientBuilder;
+import com.azure.cosmos.DirectConnectionConfig;
+import com.azure.cosmos.GatewayConnectionConfig;
 import com.azure.cosmos.implementation.RequestOptions;
 import com.azure.spring.data.cosmos.config.AbstractCosmosConfiguration;
 import com.azure.spring.data.cosmos.config.CosmosConfig;
 import com.azure.spring.data.cosmos.core.ResponseDiagnostics;
 import com.azure.spring.data.cosmos.core.ResponseDiagnosticsProcessor;
+import com.azure.spring.data.cosmos.repository.config.EnableCosmosRepositories;
 import com.azure.spring.data.cosmos.repository.config.EnableReactiveCosmosRepositories;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.lang.Nullable;
-import org.springframework.stereotype.Component;
 
 import java.text.MessageFormat;
 
-@Component
 @Configuration
-@EnableReactiveCosmosRepositories
+@EnableReactiveCosmosRepositories(basePackages = "com..azure.samples")
 @EnableConfigurationProperties(CosmosDbProperties.class)
+@PropertySource("classpath:application.properties")
 @Slf4j
 public class CosmosDbAutoConfiguration extends AbstractCosmosConfiguration {
 
+    private static final Logger logger = LogManager.getLogger(CosmosDbAutoConfiguration.class);
+
     protected final RequestOptions requestOptions = new RequestOptions();
     protected IConfigurationService configurationService;
-    private final CosmosDbProperties dbProps;
+    private CosmosDbProperties dbProps;
 
     private AzureKeyCredential azureKeyCredential;
 
@@ -47,7 +57,6 @@ public class CosmosDbAutoConfiguration extends AbstractCosmosConfiguration {
 
         this.requestOptions.setConsistencyLevel(ConsistencyLevel.SESSION);
         this.requestOptions.setScriptLoggingEnabled(true);
-
     }
 
     @Bean
@@ -71,7 +80,7 @@ public class CosmosDbAutoConfiguration extends AbstractCosmosConfiguration {
                     .directMode(directConnectionConfig, gatewayConnectionConfig);
 
         } catch (Exception ex) {
-            log.error(MessageFormat.format("getConfig failed with com.azure.backend.error: {0}",
+            logger.error(MessageFormat.format("getConfig failed with error: {0}",
                     ex.getMessage()));
 
             throw ex;
