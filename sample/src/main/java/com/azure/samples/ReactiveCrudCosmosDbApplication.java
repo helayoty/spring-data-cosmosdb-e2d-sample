@@ -14,7 +14,7 @@ import reactor.core.publisher.Mono;
 
 @SpringBootApplication
 @Slf4j
-@ComponentScan(basePackages = {"com.core", "com.azure"})
+@ComponentScan(basePackages = {"com.azure.backend", "com.azure.autoconfigure"})
 public class  ReactiveCrudCosmosDbApplication implements CommandLineRunner {
 
     @Autowired
@@ -50,11 +50,11 @@ public class  ReactiveCrudCosmosDbApplication implements CommandLineRunner {
             return u;
         }).subscribe();
 
-        Flux<User> finalUser = reactiveUserRepository.getUserWithIdLastName(
+        Flux<User> finalUser = reactiveUserRepository.getUsersByIdndLast(
                 testUser1.getId(),testUser1.getLastName());
 
         finalUser.map(u -> {
-            log.info("getUserWithIdLastName(): {}" , u);
+            log.info("getUsersByIdndLast(): {}" , u);
             return u;
         }).subscribe();
 

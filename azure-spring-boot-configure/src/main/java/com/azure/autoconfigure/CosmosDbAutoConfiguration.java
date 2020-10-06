@@ -30,7 +30,7 @@ import org.springframework.lang.Nullable;
 import java.text.MessageFormat;
 
 @Configuration
-@EnableReactiveCosmosRepositories(basePackages = "com..azure.samples")
+@EnableReactiveCosmosRepositories(basePackages = "com.azure.samples")
 @EnableConfigurationProperties(CosmosDbProperties.class)
 @PropertySource("classpath:application.properties")
 @Slf4j
