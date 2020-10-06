@@ -22,6 +22,12 @@ This is an end-2-end sample for a spring-boot application on how to use the new 
 
 ### Setup
 
+Create the following secrets in your Keyvault
+
+- cosmosdburisecretname --> <Cosmosdb URI>
+- cosmosdbkeysecretname --> <Cosmosdb Key>
+- cosmosdbsecondarykeysecretname --> <Comsmosdb secondary key>
+
 Clone the repo to your local machine
 
 ```bash
