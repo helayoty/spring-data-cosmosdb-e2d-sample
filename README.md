@@ -36,3 +36,6 @@ Set the environment variables for keyvault name
 KEYVAULT_NAME=<Your-KV-Name>
 ```
 
+### Credit
+
+Thanks for [Helium](https://github.com/retaildevcrews/helium-java) project for providing the best practice for pulling secrets from KV
