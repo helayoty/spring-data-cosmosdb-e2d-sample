@@ -11,7 +11,6 @@ import com.azure.backend.services.ICrudRepo;
 @Repository
 public interface ReactiveUserRepository extends ICrudRepo<User, String> {
 
-    @Query(value = "SELECT * FROM c WHERE c.firstName = @firstName")
     Flux<User> findByFirstName(@Param("firstName")String firstName);
 
     /**
@@ -21,9 +20,9 @@ public interface ReactiveUserRepository extends ICrudRepo<User, String> {
     Flux<User> getAllUsers();
 
     @Query(value = "select * from c where c.firstName = @firstName and c.lastName = @lastName")
-    Flux<User> getUsersByTitleAndValue(@Param("firstName") String firstName, @Param("lastName") String lastName);
+    Flux<User> getUsersByFirstAndLast(@Param("firstName") String firstName, @Param("lastName") String lastName);
 
     @Query(value = "select count(c.id) as num_ids, c.lastName from c group by c.lastName")
-    Flux<ObjectNode> getCoursesGroupByDepartment();
+    Flux<ObjectNode> getUsersGroupByLastName();
 
 }
