@@ -1,6 +1,6 @@
 # spring-data-cosmosdb-e2d-sample
 
-This is an end-2-end sample for how to use the new Java Azure SDK to pull secrets from keyvault and read/write/query from CosmosDb using [Spring Data](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/cosmos/azure-spring-data-cosmos)
+This is an end-2-end sample for a spring-boot application on how to use the new Java Azure SDK to pull secrets from keyvault and read/write/query from CosmosDb using [Spring Data](https://github.com/Azure/azure-sdk-for-java/tree/master/sdk/cosmos/azure-spring-data-cosmos)
 
 ### Azure Components
 
