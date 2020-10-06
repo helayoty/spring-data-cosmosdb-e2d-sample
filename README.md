@@ -12,6 +12,7 @@ This is an end-2-end sample for a spring-boot application on how to use the new 
 
 ### Prerequisites
 
+- Java 1.8 or 11
 - Azure subscription with the following ressources:
   - Resource Groups
   - Keyvault (You will need to set a policy for get&list permission)
